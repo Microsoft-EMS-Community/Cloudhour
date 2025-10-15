@@ -1,0 +1,48 @@
+name: Create Monthly CloudHour Folder
+
+on:
+  schedule:
+    # Runs at midnight (00:00 UTC) on the 1st of every month
+    - cron: '0 0 1 * *'
+  workflow_dispatch:  # Allow manual trigger
+
+jobs:
+  create-month-folder:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set current year and month
+        id: date
+        run: |
+          YEAR=$(date +'%Y')
+          MONTH=$(date +'%m')
+          echo "year=$YEAR" >> $GITHUB_OUTPUT
+          echo "month=$MONTH" >> $GITHUB_OUTPUT
+
+      - name: Create folder structure and placeholder
+        run: |
+          YEAR=${{ steps.date.outputs.year }}
+          MONTH=${{ steps.date.outputs.month }}
+
+          # Ensure year and month folders exist
+          mkdir -p "$YEAR/$MONTH"
+
+          # Create the placeholder file
+          echo "## Topics for potential discussion in CloudHour" > "$YEAR/$MONTH/Topic list"
+
+          echo "Created folder and placeholder: $YEAR/$MONTH/Topic list"
+
+      - name: Commit and push changes
+        run: |
+          YEAR=${{ steps.date.outputs.year }}
+          MONTH=${{ steps.date.outputs.month }}
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add "$YEAR/$MONTH/Topic list"
+          git commit -m "Create folder and placeholder for $YEAR/$MONTH" || echo "No changes to commit"
+          git push
