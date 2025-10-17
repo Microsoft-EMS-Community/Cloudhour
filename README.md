@@ -36,7 +36,13 @@ We keep it real, practical, **no marketing, no sales pitches**, just shared lear
 - 🎤 **Open mic** — feel free to speak up or just listen  
 - 🙊 **Mute** if you prefer not to participate verbally  
 - 💬 **Use the chat** to drop questions, resources, or ideas  
-- 🤝 **Be respectful** — this is a safe, inclusive community space  
+- 🤝 **Be respectful** — this is a safe, inclusive community space
+
+---
+
+## 📂 Repository Structure
+
+This repository contains all resources, notes, and materials from our CloudHour sessions - organized by **year** and **month** for easy reference.
 
 ---
 
