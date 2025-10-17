@@ -41,4 +41,4 @@ We keep it real, practical, **no marketing, no sales pitches**, just shared lear
 ---
 
 ### ❤️ Maintained by the Community
-Our Discord is proudly powered and maintained by the **Microsoft EMS Community** — for learners, practitioners, and professionals everywhere.
+Our Discord is proudly powered and maintained by the **Microsoft EMS Community** - for learners, practitioners, and professionals everywhere.
