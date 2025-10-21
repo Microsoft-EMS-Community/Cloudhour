@@ -3,3 +3,16 @@
 Joey will Co-host with Jonas
 
 Links and agenda to be agreed on
+
+## Links + Reason + poster
+* https://learn.microsoft.com/en-us/intune/intune-service/fundamentals/whats-new
+Windows 10 support in Intune
+"Devices running this version can still enroll in Intune and use eligible features, but functionality won't be guaranteed and can *vary* ."
+> Joël
+
+* https://learn.microsoft.com/en-us/entra/identity/role-based-access-control/whats-new
+Dragon administrator role, for healthcare, in rbac
+> Joël
+
+* https://www.microsoft.com/en-us/security/blog/2025/10/21/the-new-microsoft-security-store-unites-partners-and-innovation/
+> Joël
