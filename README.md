@@ -6,6 +6,8 @@
 💬 **Where:** On our Discord server  
 🎙️ **Format:** Interactive, community-driven discussions
 
+❗ **Recording:** Because of the nature of the session there is no recording.
+
 ---
 
 ## 💡 What is CloudHour?
