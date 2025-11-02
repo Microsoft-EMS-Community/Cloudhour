@@ -4,6 +4,19 @@ Joey will Co-host with Jonas
 
 Links and agenda to be agreed on
 
+Pre annoucements
+* Announce new github
+* Congratz to new MVP's
+* Congratz to new Contributors 
+
+Agenda: 
+1. (Jonas) State of Passkeys
+2. (Jonas) Share your experience with "Endpoint Privilege Management"
+3. (Joey) ? suggest Intune specific 
+4. (Joey) ? Random
+5. (Audience subject) ?
+
+
 ## Links + Reason + poster
 * https://learn.microsoft.com/en-us/intune/intune-service/fundamentals/whats-new
 Windows 10 support in Intune
@@ -17,10 +30,24 @@ Dragon administrator role, for healthcare, in rbac
 * https://www.microsoft.com/en-us/security/blog/2025/10/21/the-new-microsoft-security-store-unites-partners-and-innovation/
 > Joël
 
-
 * https://techcommunity.microsoft.com/blog/intunecustomersuccess/microsoft-intune-settings-catalog-updated-to-support-new-windows-11-version-25h2/4462927
 - Windows AI settings
 - Windows start menu, Set it once. 
 - Remove windows build in apps
 - Account Logon Logoff Audit Group Membership
 > Joël
+
+* Entra ID flaw: https://www.bleepingcomputer.com/news/security/microsoft-entra-id-flaw-allowed-hijacking-any-companys-tenant/amp/
+Jonas
+
+* How azurehound were reversed: https://cyberpress.org/azurehound-penetration-tool-abused/
+Jonas
+
+* Dedicated new 1st party resource application to enable AD to Microsoft Entra ID sync using Microsoft Entra Connect Sync: https://docs.azure.cn/en-us/entra/identity/hybrid/connect/how-to-connect-install-automatic-upgrade
+Jonas
+
+* Retirement - Microsoft Authentication Library to MSAL Recommendations API:  https://docs.azure.cn/en-us/entra/fundamentals/whats-new#retirement---microsoft-authentication-library-to-msal-recommendations-api
+Jonas
+
+* Plan for change - New end user homepage in My Account: https://docs.azure.cn/en-us/entra/fundamentals/whats-new#plan-for-change---new-end-user-homepage-in-my-account
+Jonas 
