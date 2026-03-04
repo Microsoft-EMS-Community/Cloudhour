@@ -1,1 +1,21 @@
 ## Topics for potential discussion in CloudHour
+
+Microsoft Entra ID - SyncJacking	
+New safeguards ("SyncJacking" blocks) prevent unauthorized account remapping in hybrid environments.
+https://docs.azure.cn/en-us/entra/fundamentals/whats-new
+
+Microsoft Defender - Predictive Shielding	
+General Availability of "Proactive User Containment" to automatically isolate high-risk user credentials.
+https://learn.microsoft.com/en-us/defender-xdr/whats-new
+
+Microsoft Defender - Teams Security
+Security teams can now block external suspicious organizations directly from the Defender portal.	
+https://sharepointstuff.com/2026/03/02/microsoft-roadmap-roundup-02-march-2026/
+
+Community Tool - Registry Management	
+PowerShell template to manage HKCU/HKLM registry keys on shared devices via Intune.
+https://www.imab.dk/the-only-powershell-script-you-need-to-manage-registry-on-windows-devices-using-microsoft-intune/
+
+Community Tool - macOS Cleanups	
+MVP script to find and clean duplicate macOS records in Entra ID caused by PSSO.	
+https://allthingscloud.blog/duplicate-macos-device-records-entra-id/
