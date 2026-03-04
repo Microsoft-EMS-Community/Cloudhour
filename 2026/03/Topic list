@@ -22,3 +22,16 @@ https://allthingscloud.blog/duplicate-macos-device-records-entra-id/
 
 Group SOA Conversion Tool
 https://github.com/codeandersen/Group-SOA-Conversion-Tool
+
+Microsoft E7
+https://www.reddit.com/r/sysadmin/comments/1rjmepn/microsoft_365_e7_new_enterprise_licensing_tier/
+
+- Conditional Access policies set to "All resources" with exclusions were not enforced for apps using minimal sign-in scopes
+- This gap allowed some sign-ins to bypass security checks like MFA and device compliance
+- Starting March 27, 2026, Microsoft will close this loophole across all tenants
+- All sign-ins will now be evaluated against Conditional Access policies, regardless of the scope requested
+- Most organizations need no action - only custom apps using minimal scopes may need review
+
+Unified tenant configuration management
+
+https://learn.microsoft.com/en-us/graph/unified-tenant-configuration-management-concept-overview
