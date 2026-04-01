@@ -17,3 +17,15 @@ https://learn.microsoft.com/en-us/defender-xdr/whats-new#march-2026
 https://techcommunity.microsoft.com/blog/microsoftsentinelblog/what%E2%80%99s-new-in-microsoft-sentinel-rsac-2026/4503971https://learn.microsoft.com/en-us/azure/osconfig/overview-laps-azure-arc?tabs=azure-vm
 
 https://www.cisa.gov/news-events/alerts/2026/03/18/cisa-urges-endpoint-management-system-hardening-after-cyberattack-against-us-organization
+
+
+
+Jonas (Il review slides and see if they fit in the flow): 
+- Service-principal-less authentication is officially dead as of March 31, 2026 
+--https://techcommunity.microsoft.com/blog/microsoft-entra-blog/service-principal-required-for-microsoft-entra-id/4405796 
+- Admins get group-based configuration via a new passkeyType property. 
+--https://www.helpnetsecurity.com/2026/01/26/microsoft-auto-enable-entra-id-passkeys/ 
+- A broader scan of 5,618 MCP servers found a 36.7% SSRF exposure rate across servers that accept external URLs Microsoft patched CVE-2026-26118 a server-side request forgery vulnerability in Azure MCP Server Tools rated 8.8 CVSS. 
+--https://dev.to/manja316/we-scanned-5618-mcp-servers-for-security-vulnerabilities-heres-what-we-found-30k 
+- New interesting ms setting catalog settings 
+-- https://learn.microsoft.com/en-us/intune/intune-service/fundamentals/whats-new#new-settings-in-the-windows-settings-catalog-
