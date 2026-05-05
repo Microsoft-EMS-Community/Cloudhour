@@ -1,1 +1,21 @@
 ## Topics for potential discussion in CloudHour
+
+Entra ID - Agent ID Platform	
+GA of the identity/authorization framework for AI agents, supporting OAuth 2.0 and MCP.
+https://learn.microsoft.com/en-us/entra/fundamentals/whats-new
+https://learn.microsoft.com/en-us/entra/agent-id/whats-new-agent-id
+
+Microsoft 365 E7 "Frontier Suite" announced at $99/user/month, 
+bundling M365 E5 + Copilot + Entra Suite + Agent 365. First new Microsoft 365 SKU above E5 since 2018. Impact: ELA renegotiation trigger for enterprises already on E5+Copilot. 
+https://www.microsoft.com/en-us/security/blog/2026/05/01/microsoft-agent-365-now-generally-available-expands-capabilities-and-integrations/
+
+Passkeys on Windows (Windows Hello container) [Rollout]
+Device-bound and synced FIDO2 passkeys natively in the Windows Hello container; admin policies via Intune/Entra.
+https://learn.microsoft.com/en-us/entra/fundamentals/whats-new#general-availability---synced-passkeys-in-microsoft-entra-id
+
+Windows 365 SMB price cut [Change]
+Microsoft reduces Business-tier pricing; new bundles for SMB resellers.
+https://www.computerworld.com/article/4159190/microsoft-to-cut-windows-365-price-for-smbs.html
+
+DNSSEC Enablement Wizard for Exchange Online between June-august
+https://techcommunity.microsoft.com/blog/exchange/modernizing-dns-security-for-exchange-online-mail-flow/4514248
