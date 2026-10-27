@@ -1,10 +1,17 @@
 ## Topics for potential discussion in CloudHour
 
+[M365 Admin]
+- On Oct 19 Microsoft said this message didn't reach its intended audience and can be safely disregarded. Some community newsletters repeated the claim this week, so don't promise customers a Security Copilot entitlement based on this post. 
+https://mc.merill.net/message/MC1478465
+
+
 [ENTRA]
 - September saw Microsoft's passkey migration campaign begin affecting users configured for SMS/voice authentication. The reported timetable says automatic passkey enablement began on 1 September 2026, while users still have to actually register a passkey. Support for customer-managed telephony providers is scheduled to begin on 30 October 2026, ahead of Microsoft's planned 2027 retirement milestones for its own SMS/voice delivery
 - Microsoft is introducing Content Security Policy enforcement on login.microsoftonline.com during October.
 - Microsoft retired custom Entra company-branding CSS layout and positioning properties on 26 October as part of its Secure Future Initiative.
 - CAE gains additional device-risk signals
+- Entra dynamic group 'MemberOf' rule operator stopping November 3
+- Agent ID: Admin consent **not** required; blueprint creation open to default users unless switched off.	
 
 [INTUNE]
 - Intune introduced client-driven compliance evaluation for Windows in September. Devices can detect changes in signals including firewall, antivirus, BitLocker, Defender status, OS build, real-time protection and Secure Boot and request compliance re-evaluation instead of simply waiting for the normal check-in.
@@ -19,6 +26,8 @@
 - ISOC 
 - Unified Data Management enters public preview
 - Cross-Tenant delegated security administration is now GA 
+- GA Defender Vulnerability Management: vulnerability assessment for Microsoft Store apps
+DVM now inventories supported Microsoft Store apps and assesses them for vulnerabilities, with file path and a suggested hunting query in Software evidence. ** Coverage is limited to a select set of common apps for now. **
 
 [PURVIEW]
 - Endpoint DLP now protects FTP and SFTP transfers
