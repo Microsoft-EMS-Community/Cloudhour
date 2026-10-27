@@ -1,1 +1,24 @@
 ## Topics for potential discussion in CloudHour
+
+[ENTRA]
+- September saw Microsoft's passkey migration campaign begin affecting users configured for SMS/voice authentication. The reported timetable says automatic passkey enablement began on 1 September 2026, while users still have to actually register a passkey. Support for customer-managed telephony providers is scheduled to begin on 30 October 2026, ahead of Microsoft's planned 2027 retirement milestones for its own SMS/voice delivery
+- Microsoft is introducing Content Security Policy enforcement on login.microsoftonline.com during October.
+- Microsoft retired custom Entra company-branding CSS layout and positioning properties on 26 October as part of its Secure Future Initiative.
+- CAE gains additional device-risk signals
+
+[INTUNE]
+- Intune introduced client-driven compliance evaluation for Windows in September. Devices can detect changes in signals including firewall, antivirus, BitLocker, Defender status, OS build, real-time protection and Secure Boot and request compliance re-evaluation instead of simply waiting for the normal check-in.
+- From 21 September, Intune can roll apps and configuration policies out progressively through deployment plans, with multiple rings, rollout timing and integration with Multiple Admin Approval.
+- Intune now exposes Microsoft Defender for Endpoint AI-agent runtime protection through an Endpoint Security template.
+- On 5 October Microsoft made the Windows 11 26H2 Intune security baseline available, with new settings, updated defaults and revised security guidance. Importantly, existing baseline profiles do not automatically move to 26H2
+- Intune 2609 introduced push notifications for administrator/service-side Win32 app changes, allowing managed devices to check in sooner rather than simply waiting for their regular polling cycle. IME also checks app assignments immediately after the Enrollment Status Page finishes, reducing the delay before post-ESP required Win32 applications start installing.
+- 
+
+[XDR & SIEM]
+- New Threat Intelligence overview and explorer
+- ISOC 
+- Unified Data Management enters public preview
+- Cross-Tenant delegated security administration is now GA 
+
+[PURVIEW]
+- Endpoint DLP now protects FTP and SFTP transfers
