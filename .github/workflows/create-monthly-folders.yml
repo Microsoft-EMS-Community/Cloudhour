@@ -3,13 +3,26 @@ name: Create Monthly CloudHour Folder
 
 on:
   schedule:
-    # Run at 00:00 UTC on the 1st of every month
+    # Run on the 1st of each month at 00:00 UTC
     - cron: '0 0 1 * *'
 
   workflow_dispatch:
+    inputs:
+      year:
+        description: 'Year (blank = current year)'
+        required: false
+        type: string
+      month:
+        description: 'Month (01-12, blank = current month)'
+        required: false
+        type: string
 
 permissions:
   contents: write
+
+concurrency:
+  group: cloudhour-monthly-content
+  cancel-in-progress: false
 
 jobs:
   create-month-folder:
@@ -19,91 +32,225 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set current year and month
+      - name: Determine year and month
         id: date
+        shell: bash
+        env:
+          INPUT_YEAR: ${{ inputs.year }}
+          INPUT_MONTH: ${{ inputs.month }}
         run: |
-          echo "year=$(date -u +'%Y')" >> "$GITHUB_OUTPUT"
-          echo "month=$(date -u +'%m')" >> "$GITHUB_OUTPUT"
-          echo "month_name=$(date -u +'%B')" >> "$GITHUB_OUTPUT"
+          set -euo pipefail
 
-      - name: Create monthly CloudHour topic list
+          YEAR="${INPUT_YEAR:-$(date -u +'%Y')}"
+          MONTH="${INPUT_MONTH:-$(date -u +'%m')}"
+
+          if ! [[ "$YEAR" =~ ^[0-9]{4}$ ]]; then
+            echo "::error::Year must be four digits."
+            exit 1
+          fi
+
+          if ! [[ "$MONTH" =~ ^(0[1-9]|1[0-2])$ ]]; then
+            echo "::error::Month must be 01-12."
+            exit 1
+          fi
+
+          MONTH_NAME=$(date -u -d "$YEAR-$MONTH-01" +'%B')
+
+          echo "year=$YEAR" >> "$GITHUB_OUTPUT"
+          echo "month=$MONTH" >> "$GITHUB_OUTPUT"
+          echo "month_name=$MONTH_NAME" >> "$GITHUB_OUTPUT"
+
+      - name: Create monthly CloudHour Markdown
+        shell: bash
         env:
           YEAR: ${{ steps.date.outputs.year }}
           MONTH: ${{ steps.date.outputs.month }}
           MONTH_NAME: ${{ steps.date.outputs.month_name }}
         run: |
+          set -euo pipefail
+
           DIRECTORY="$YEAR/$MONTH"
-          FILE="$DIRECTORY/Topics.md"
+          FILE="$DIRECTORY/Cloudhour-$MONTH_NAME.md"
 
           mkdir -p "$DIRECTORY"
 
-          # Do not overwrite existing topics
-          if [ -f "$FILE" ]; then
-            echo "Topic list already exists: $FILE"
+          # Never overwrite an existing file
+          if [ -e "$FILE" ]; then
+            echo "File already exists: $FILE"
             exit 0
           fi
 
+          # Document introduction
           cat > "$FILE" <<EOF
           # CloudHour — $MONTH_NAME $YEAR
 
-          ## Today's Agenda
+          **Community:** Microsoft EMS Community
+          **Session:** $MONTH_NAME $YEAR
+          **Status:** Draft
 
-          **On the table**
+          > This document is the source of truth for
+          > generating the monthly CloudHour presentation.
+          > Replace TBD values with confirmed information.
+          > Omit unfilled entries from the final slides.
+
+          ---
+
+          # 1. Today's Agenda
+
+          ## On the Table
 
           Up to six changes hitting your tenant.
           A quick brief on each, then we open the floor.
           We will not get to all of them, so pick your battles.
 
-          ---
-
-          ## Topics List
-
           EOF
 
+          # Six agenda topics
           for i in $(seq 1 6); do
             cat >> "$FILE" <<EOF
+
           ### Topic $i
 
-          **Title:** TBD
-
-          **Workload Area:** TBD
-
-          **Date:** TBD (YYYY-MM-DD)
-
-          **Link:** TBD
-
-          ---
+          - **Title:** TBD
+          - **Workload Area:** TBD
+          - **Date:** TBD (YYYY-MM-DD)
+          - **Link:** TBD
 
           EOF
           done
 
           cat >> "$FILE" <<EOF
-          ## Open Floor
 
-          **Topics from the crowd**
+          ### Open Floor
 
-          Bring your own questions, announcements,
-          changes or discussion points.
+          Topics from the crowd.
+          Bring your own questions, announcements
+          or discussion points.
+
+          ---
+
+          # 2. Links to Share
+
+          ## Worth a Bookmark
+
+          Useful links, tools, documentation,
+          announcements and community resources.
+
+          EOF
+
+          # Seven links
+          for i in $(seq 1 7); do
+            cat >> "$FILE" <<EOF
+
+          ### Link $i
+
+          - **Title:** TBD
+          - **URL:** TBD
+          - **Description:** TBD
+
+          EOF
+          done
+
+          cat >> "$FILE" <<EOF
+
+          ---
+
+          # 3. On the Radar
+
+          ## Next 90 Days
+
+          Upcoming changes, retirements, releases
+          and deadlines affecting Microsoft environments.
+
+          ### Identity & Access
+
+          *Microsoft Entra, authentication, identity
+          governance and access management.*
+
+          EOF
+
+          # Radar items 1-4
+          for i in $(seq 1 4); do
+            cat >> "$FILE" <<EOF
+
+          #### Radar Item $i
+
+          - **Date:** TBD (YYYY-MM-DD)
+          - **Title:** TBD
+          - **Link:** TBD
+
+          EOF
+          done
+
+          cat >> "$FILE" <<EOF
+
+          ### Endpoints — Windows / Android / iOS
+
+          *Microsoft Intune, Windows, Android,
+          Apple and endpoint management.*
+
+          EOF
+
+          # Radar items 5-8
+          for i in $(seq 5 8); do
+            cat >> "$FILE" <<EOF
+
+          #### Radar Item $i
+
+          - **Date:** TBD (YYYY-MM-DD)
+          - **Title:** TBD
+          - **Link:** TBD
+
+          EOF
+          done
+
+          cat >> "$FILE" <<EOF
+
+          ### Defender & Data
+
+          *Microsoft Defender, Sentinel, Purview,
+          SIEM, XDR and data protection.*
+
+          EOF
+
+          # Radar items 9-12
+          for i in $(seq 9 12); do
+            cat >> "$FILE" <<EOF
+
+          #### Radar Item $i
+
+          - **Date:** TBD (YYYY-MM-DD)
+          - **Title:** TBD
+          - **Link:** TBD
+
+          EOF
+          done
+
+          cat >> "$FILE" <<EOF
 
           ---
 
           *CloudHour | Microsoft EMS Community | $MONTH_NAME $YEAR*
           EOF
 
-          echo "Created CloudHour topic list: $FILE"
+          echo "Created: $FILE"
 
       - name: Commit and push changes
+        shell: bash
         env:
           YEAR: ${{ steps.date.outputs.year }}
           MONTH: ${{ steps.date.outputs.month }}
+          MONTH_NAME: ${{ steps.date.outputs.month_name }}
         run: |
-          FILE="$YEAR/$MONTH/Topics.md"
+          set -euo pipefail
+
+          FILE="$YEAR/$MONTH/Cloudhour-$MONTH_NAME.md"
 
           git config user.name "github-actions[bot]"
           git config user.email \
-            "github-actions[bot]@users.noreply.github.com"
+            "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add "$FILE"
+          git add -- "$FILE"
 
           if git diff --cached --quiet; then
             echo "No changes to commit."
@@ -111,6 +258,6 @@ jobs:
           fi
 
           git commit -m \
-            "Create CloudHour topics for $YEAR/$MONTH"
+            "Create CloudHour content for $MONTH_NAME $YEAR"
 
           git push
