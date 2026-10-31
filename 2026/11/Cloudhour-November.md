@@ -1,4 +1,4 @@
-# CloudHour — November 2026
+# CloudHour - November 2026
 
 **Community:** Microsoft EMS Community
 **Session:** November 2026
@@ -176,7 +176,7 @@ governance and access management.*
 - **Link:** TBD
 
 
-### Endpoints — Windows / Android / iOS
+### Endpoints - Windows / Android / iOS
 
 *Microsoft Intune, Windows, Android,
 Apple and endpoint management.*
