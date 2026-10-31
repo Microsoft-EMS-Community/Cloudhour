@@ -82,7 +82,7 @@ jobs:
 
           # Document introduction
           cat > "$FILE" <<EOF
-          # CloudHour — $MONTH_NAME $YEAR
+          # CloudHour - $MONTH_NAME $YEAR
 
           **Community:** Microsoft EMS Community
           **Session:** $MONTH_NAME $YEAR
@@ -184,7 +184,7 @@ jobs:
 
           cat >> "$FILE" <<EOF
 
-          ### Endpoints — Windows / Android / iOS
+          ### Endpoints - Windows / Android / iOS
 
           *Microsoft Intune, Windows, Android,
           Apple and endpoint management.*
