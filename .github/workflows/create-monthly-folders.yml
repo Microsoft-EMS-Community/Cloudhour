@@ -3,7 +3,7 @@ name: Create Monthly CloudHour Folder
 
 on:
   schedule:
-    # Run on the 1st of each month at 00:00 UTC
+    # Run at 00:00 UTC on the 1st of every month
     - cron: '0 0 1 * *'
 
   workflow_dispatch:
@@ -74,15 +74,35 @@ jobs:
 
           mkdir -p "$DIRECTORY"
 
-          # Never overwrite an existing file
+          # Never overwrite existing monthly content
           if [ -e "$FILE" ]; then
             echo "File already exists: $FILE"
+            echo "Skipping generation to preserve content."
             exit 0
           fi
 
-          # Document introduction
+          # -------------------------------------
+          # DOCUMENT HEADER AND DISCORD WARNING
+          # -------------------------------------
+
           cat > "$FILE" <<EOF
           # CloudHour - $MONTH_NAME $YEAR
+
+          > [!WARNING]
+          > **ACTION REQUIRED - CloudHour Moderators & Administrators**
+          >
+          > Before each CloudHour session, ensure the
+          > **agenda in the Discord event description is updated**
+          > to reflect the topics listed in this document.
+          >
+          > If topics are added, removed, or changed,
+          > the Discord event information must also be updated
+          > so attendees know what to expect.
+          >
+          > **The GitHub agenda and Discord event description
+          > should always remain aligned.**
+
+          ---
 
           **Community:** Microsoft EMS Community
           **Session:** $MONTH_NAME $YEAR
@@ -105,7 +125,10 @@ jobs:
 
           EOF
 
-          # Six agenda topics
+          # -------------------------------------
+          # TODAY'S AGENDA - MAXIMUM 6 TOPICS
+          # -------------------------------------
+
           for i in $(seq 1 6); do
             cat >> "$FILE" <<EOF
 
@@ -138,7 +161,10 @@ jobs:
 
           EOF
 
-          # Seven links
+          # -------------------------------------
+          # LINKS TO SHARE - MAXIMUM 7 LINKS
+          # -------------------------------------
+
           for i in $(seq 1 7); do
             cat >> "$FILE" <<EOF
 
@@ -169,7 +195,10 @@ jobs:
 
           EOF
 
-          # Radar items 1-4
+          # -------------------------------------
+          # RADAR: IDENTITY & ACCESS - ITEMS 1-4
+          # -------------------------------------
+
           for i in $(seq 1 4); do
             cat >> "$FILE" <<EOF
 
@@ -191,7 +220,10 @@ jobs:
 
           EOF
 
-          # Radar items 5-8
+          # -------------------------------------
+          # RADAR: ENDPOINTS - ITEMS 5-8
+          # -------------------------------------
+
           for i in $(seq 5 8); do
             cat >> "$FILE" <<EOF
 
@@ -213,7 +245,10 @@ jobs:
 
           EOF
 
-          # Radar items 9-12
+          # -------------------------------------
+          # RADAR: DEFENDER & DATA - ITEMS 9-12
+          # -------------------------------------
+
           for i in $(seq 9 12); do
             cat >> "$FILE" <<EOF
 
@@ -226,6 +261,10 @@ jobs:
           EOF
           done
 
+          # -------------------------------------
+          # DOCUMENT FOOTER
+          # -------------------------------------
+
           cat >> "$FILE" <<EOF
 
           ---
@@ -233,7 +272,7 @@ jobs:
           *CloudHour | Microsoft EMS Community | $MONTH_NAME $YEAR*
           EOF
 
-          echo "Created: $FILE"
+          echo "Created CloudHour Markdown: $FILE"
 
       - name: Commit and push changes
         shell: bash
