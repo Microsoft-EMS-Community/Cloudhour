@@ -1,10 +1,15 @@
+
 name: Create Monthly CloudHour Folder
 
 on:
   schedule:
-    # Runs at midnight (00:00 UTC) on the 1st of every month
+    # Run at 00:00 UTC on the 1st of every month
     - cron: '0 0 1 * *'
-  workflow_dispatch:  # Allow manual trigger
+
+  workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   create-month-folder:
@@ -17,32 +22,95 @@ jobs:
       - name: Set current year and month
         id: date
         run: |
-          YEAR=$(date +'%Y')
-          MONTH=$(date +'%m')
-          echo "year=$YEAR" >> $GITHUB_OUTPUT
-          echo "month=$MONTH" >> $GITHUB_OUTPUT
+          echo "year=$(date -u +'%Y')" >> "$GITHUB_OUTPUT"
+          echo "month=$(date -u +'%m')" >> "$GITHUB_OUTPUT"
+          echo "month_name=$(date -u +'%B')" >> "$GITHUB_OUTPUT"
 
-      - name: Create folder structure and placeholder
+      - name: Create monthly CloudHour topic list
+        env:
+          YEAR: ${{ steps.date.outputs.year }}
+          MONTH: ${{ steps.date.outputs.month }}
+          MONTH_NAME: ${{ steps.date.outputs.month_name }}
         run: |
-          YEAR=${{ steps.date.outputs.year }}
-          MONTH=${{ steps.date.outputs.month }}
+          DIRECTORY="$YEAR/$MONTH"
+          FILE="$DIRECTORY/Topics.md"
 
-          # Ensure year and month folders exist
-          mkdir -p "$YEAR/$MONTH"
+          mkdir -p "$DIRECTORY"
 
-          # Create the placeholder file
-          echo "## Topics for potential discussion in CloudHour" > "$YEAR/$MONTH/Topic list"
+          # Do not overwrite existing topics
+          if [ -f "$FILE" ]; then
+            echo "Topic list already exists: $FILE"
+            exit 0
+          fi
 
-          echo "Created folder and placeholder: $YEAR/$MONTH/Topic list"
+          cat > "$FILE" <<EOF
+          # CloudHour — $MONTH_NAME $YEAR
+
+          ## Today's Agenda
+
+          **On the table**
+
+          Up to six changes hitting your tenant.
+          A quick brief on each, then we open the floor.
+          We will not get to all of them, so pick your battles.
+
+          ---
+
+          ## Topics List
+
+          EOF
+
+          for i in $(seq 1 6); do
+            cat >> "$FILE" <<EOF
+          ### Topic $i
+
+          **Title:** TBD
+
+          **Workload Area:** TBD
+
+          **Date:** TBD (YYYY-MM-DD)
+
+          **Link:** TBD
+
+          ---
+
+          EOF
+          done
+
+          cat >> "$FILE" <<EOF
+          ## Open Floor
+
+          **Topics from the crowd**
+
+          Bring your own questions, announcements,
+          changes or discussion points.
+
+          ---
+
+          *CloudHour | Microsoft EMS Community | $MONTH_NAME $YEAR*
+          EOF
+
+          echo "Created CloudHour topic list: $FILE"
 
       - name: Commit and push changes
+        env:
+          YEAR: ${{ steps.date.outputs.year }}
+          MONTH: ${{ steps.date.outputs.month }}
         run: |
-          YEAR=${{ steps.date.outputs.year }}
-          MONTH=${{ steps.date.outputs.month }}
+          FILE="$YEAR/$MONTH/Topics.md"
 
           git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.email \
+            "github-actions[bot]@users.noreply.github.com"
 
-          git add "$YEAR/$MONTH/Topic list"
-          git commit -m "Create folder and placeholder for $YEAR/$MONTH" || echo "No changes to commit"
+          git add "$FILE"
+
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+
+          git commit -m \
+            "Create CloudHour topics for $YEAR/$MONTH"
+
           git push
